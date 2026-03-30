@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "Inter", sans-serif;
+            background: #05050a;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%);
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(5, 5, 16, 0.4) 0%, rgba(5, 5, 16, 0.9) 100%);
+            z-index: 1;
+        }
+
+        .glass-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 80px;
+            text-align: center;
+            box-shadow: 0 0 80px rgba(0, 243, 255, 0.15);
+            max-width: 1100px;
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 600px;
+            transform: translateX(60px);
+        }
+
+        .neon-line {
+            width: 120px;
+            height: 60px;
+            border-top: 4px solid #00F3FF;
+            margin-top: 20px;
+            box-shadow: 0 -5px 15px rgba(0, 243, 255, 0.3);
+        }
+
+        h1.primary {
+            font-family: 'Space Grotesk';
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+        }
+
+        h1.secondary {
+            font-family: 'Space Grotesk';
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 5px 0 30px 0;
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .ps-box {
+            max-width: 850px;
+            margin-top: 20px;
+            padding: 30px;
+            background: rgba(0, 243, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .ps-text {
+            font-family: 'Inter';
+            font-size: 20px;
+            color: #e0e0e0;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .tagline {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #00F3FF;
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 6px;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        .tech-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .c1 {
+            width: 800px;
+            height: 800px;
+            border-style: dashed;
+            animation: rotate 50s linear infinite;
+        }
+
+        .c2 {
+            width: 1000px;
+            height: 1000px;
+            border: 1px solid rgba(188, 19, 254, 0.05);
+            animation: rotate-rev 70s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes rotate-rev {
+            from {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="overlay"></div>
+        <div class="tech-circle c1"></div>
+        <div class="tech-circle c2"></div>
+
+        <div class="glass-card">
+            <div style="margin-bottom: 30px;">
+                <p
+                    style="font-family: 'Space Grotesk'; font-size: 14px; color: #00F3FF; letter-spacing: 8px; text-transform: uppercase; font-weight: 800;">
+                    PROBLEM STATEMENT</p>
+            </div>
+
+            <h1 class="primary">Dynamic AI Traffic</h1>
+            <h1 class="secondary">Flow Optimizer</h1>
+
+            <div class="ps-box">
+                <p class="ps-text">
+                    Create an intelligent traffic management system that uses real-time computer vision to dynamically
+                    adjust signal timings based on live traffic density. The system must also enable an AI-powered green
+                    corridor feature to prioritize and clear routes for emergency vehicles such as ambulances and fire
+                    services.
+                </p>
+            </div>
+
+            <div class="tagline">
+                <i class="fas fa-microchip"></i>
+                <span>INTEGRATED • REAL-TIME • ADAPTIVE</span>
+                <i class="fas fa-network-wired"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function (event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+</body>
+
+</html>

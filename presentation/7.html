@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%);
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Tech Background Elements */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA0MCAwIEwgMCAwIDAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==');
+        }
+
+        .header {
+            z-index: 10;
+            margin-top: 25px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            margin: 0;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #00F3FF;
+            letter-spacing: 2px;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Main Content Area */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        /* Section 1: Vehicle Weights */
+        .weights-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .weight-card {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .weight-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 243, 255, 0.4);
+        }
+
+        .card-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        .card-title {
+            font-size: 16px;
+            color: #AAA;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .card-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* Specific Colors */
+        .type-moto {
+            color: #00FF9D;
+        }
+
+        .type-car {
+            color: #00F3FF;
+        }
+
+        .type-truck {
+            color: #FFD700;
+        }
+
+        .type-bus {
+            color: #BC13FE;
+        }
+
+        /* Section 2: Formula */
+        .formula-section {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .formula-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: #050510;
+            padding: 0 10px;
+            color: #00F3FF;
+            font-size: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .formula-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            color: #FFF;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .math-symbol {
+            color: #666;
+            font-weight: 900;
+        }
+
+        .variable {
+            color: #00F3FF;
+        }
+
+        /* Section 3: Severity Meter */
+        .severity-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .meter-container {
+            width: 100%;
+            height: 75px;
+            display: flex;
+            gap: 12px;
+            padding: 8px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .meter-segment {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            opacity: 0.5;
+            /* Improved visibility from 0.3 */
+            border-radius: 8px;
+            transition: all 0.5s ease;
+        }
+
+        .meter-segment.active {
+            opacity: 1;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        .seg-low {
+            background-color: rgba(0, 255, 157, 0.2);
+            border: 1px solid #00FF9D;
+            color: #00FF9D;
+        }
+
+        .seg-med {
+            background-color: rgba(255, 215, 0, 0.2);
+            border: 1px solid #FFD700;
+            color: #FFD700;
+        }
+
+        .seg-high {
+            background-color: rgba(255, 42, 109, 0.2);
+            border: 1px solid #FF2A6D;
+            color: #FF2A6D;
+        }
+
+        .seg-severe {
+            background-color: rgba(188, 19, 254, 0.2);
+            border: 1px solid #BC13FE;
+            color: #BC13FE;
+        }
+
+        .seg-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .seg-range {
+            font-size: 12px;
+            margin-top: 3px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* Animated Indicator */
+        .calculation-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .calc-box {
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: right;
+        }
+
+        /* Glow effects */
+        .glow-text {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        p {
+            margin: 0;
+            color: white;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="slide-container">
+        <div style="position: relative; width: 100%; height: 100%;">
+            <div class="bg-grid"></div>
+            <!-- Header -->
+            <div class="header">
+                <h1>
+                    <p>CONGESTION INTELLIGENCE</p>
+                </h1>
+                <div class="subtitle">
+                    <p>Weighted Density Calculation</p>
+                </div>
+            </div>
+            <div class="content-wrapper">
+                <!-- Top Row: Vehicle Weights -->
+                <div class="weights-section">
+                    <div class="weight-card">
+                        <i class="fas fa-motorcycle card-icon type-moto"></i>
+                        <p class="card-title">MOTORCYCLE</p>
+                        <p class="card-value type-moto">x 0.5</p>
+                    </div>
+                    <div class="weight-card">
+                        <i class="fas fa-car card-icon type-car"></i>
+                        <p class="card-title">CAR</p>
+                        <p class="card-value type-car">x 1.0</p>
+                    </div>
+                    <div class="weight-card">
+                        <i class="fas fa-truck card-icon type-truck"></i>
+                        <p class="card-title">TRUCK</p>
+                        <p class="card-value type-truck">x 2.0</p>
+                    </div>
+                    <div class="weight-card">
+                        <i class="fas fa-bus card-icon type-bus"></i>
+                        <p class="card-title">BUS</p>
+                        <p class="card-value type-bus">x 2.5</p>
+                    </div>
+                </div>
+                <!-- Middle Row: Formula -->
+                <div class="formula-section" style="width: 100%; max-width: 900px;">
+                    <div class="formula-label">
+                        <p>CORE LOGIC</p>
+                    </div>
+                    <div class="formula-text" style="font-size: 20px;">
+                        <p>DENSITY %</p>
+                        <p class="math-symbol">=</p>
+                        <p>(</p>
+                        <p class="variable">TOTAL WEIGHTED LOAD</p>
+                        <p class="math-symbol">/</p>
+                        <p>LANE CAPACITY</p>
+                        <p>)</p>
+                        <p class="math-symbol">×</p>
+                        <p>100</p>
+                    </div>
+                </div>
+                <!-- Bottom Row: Severity Meter -->
+                <div class="severity-section" style="width: 100%; max-width: 900px;">
+                    <div class="calculation-visual">
+                        <div class="calc-box"
+                            style="border-color: #FF2A6D; box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);">
+                            <p style="font-size: 10px; color: #888; margin:0; text-align: center;">CURRENT SYSTEM LOAD
+                            </p>
+                            <p
+                                style="font-family: 'Space Grotesk'; font-size: 28px; color: #FF2A6D; margin:0; text-align: center; font-weight: 800;">
+                                85.4%</p>
+                        </div>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5px;">
+                        <p style="margin: 0; color: #FFF; font-size: 12px; font-weight: 600; letter-spacing: 1px;">
+                            SEVERITY CLASSIFICATION</p>
+                        <p
+                            style="margin: 0; color: #FF2A6D; font-family: 'Space Grotesk'; font-size: 12px; font-weight: 700;">
+                            STATUS: HIGH CONGESTION</p>
+                    </div>
+                    <div class="meter-container">
+                        <!-- LOW -->
+                        <div class="meter-segment seg-low">
+                            <p class="seg-label">LOW</p>
+                            <p class="seg-range">0 - 30%</p>
+                        </div>
+                        <!-- MED -->
+                        <div class="meter-segment seg-med">
+                            <p class="seg-label">MEDIUM</p>
+                            <p class="seg-range">30 - 70%</p>
+                        </div>
+                        <!-- HIGH (Active) -->
+                        <div class="meter-segment seg-high active">
+                            <p class="seg-label glow-text">HIGH</p>
+                            <p class="seg-range">70 - 100%</p>
+                        </div>
+                        <!-- SEVERE -->
+                        <div class="meter-segment seg-severe">
+                            <p class="seg-label">SEVERE</p>
+                            <p class="seg-range">&gt; 100%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function (event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+
+</body>
+
+
+
+</html>

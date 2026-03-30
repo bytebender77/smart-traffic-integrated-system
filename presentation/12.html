@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%);
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwRjNGRiIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=');
+        }
+
+        /* Header */
+        .header {
+            z-index: 10;
+            margin-top: 40px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            margin: 0;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            color: #00FF9D;
+            letter-spacing: 3px;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Main Content Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            width: 1180px;
+            z-index: 10;
+            flex: 1;
+            padding-bottom: 60px;
+            align-items: center;
+        }
+
+        /* KPI Card */
+        .kpi-card {
+            background: rgba(20, 20, 35, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 400px;
+            position: relative;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-10px);
+            background: rgba(30, 30, 50, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Top Accent Bar */
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            right: 20px;
+            height: 4px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* Icon Container */
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .percentage-text {
+            position: absolute;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .percentage-symbol {
+            font-size: 18px;
+            color: #aaa;
+        }
+
+        /* Text Content */
+        .kpi-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            color: #AAA;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .kpi-desc {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        /* Specific Colors */
+        /* 1. Congestion (Down - Good) -> Green/Blue */
+        .color-congestion {
+            color: #00F3FF;
+            border-color: #00F3FF;
+        }
+
+        .bg-congestion {
+            background-color: #00F3FF;
+        }
+
+        .shadow-congestion {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+        }
+
+        /* 2. Delay (Down - Good) -> Purple */
+        .color-delay {
+            color: #BC13FE;
+            border-color: #BC13FE;
+        }
+
+        .bg-delay {
+            background-color: #BC13FE;
+        }
+
+        .shadow-delay {
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.4);
+        }
+
+        /* 3. Efficiency (Up - Good) -> Green */
+        .color-efficiency {
+            color: #00FF9D;
+            border-color: #00FF9D;
+        }
+
+        .bg-efficiency {
+            background-color: #00FF9D;
+        }
+
+        .shadow-efficiency {
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.4);
+        }
+
+        /* 4. Speed (Up - Good) -> Red/Pink (Emergency) */
+        .color-speed {
+            color: #FF2A6D;
+            border-color: #FF2A6D;
+        }
+
+        .bg-speed {
+            background-color: #FF2A6D;
+        }
+
+        .shadow-speed {
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.4);
+        }
+
+        /* Arrow Indicators */
+        .indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 5px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Decoration Lines */
+        .deco-line {
+            position: absolute;
+            bottom: 60px;
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="slide-container">
+        <div style="position: relative; width: 100%; height: 100%;">
+            <div class="bg-grid"></div>
+            <!-- Header -->
+            <div class="header">
+                <h1>
+                    <p>SYSTEM IMPACT</p>
+                </h1>
+                <div class="subtitle"
+                    style="color: #666; font-size: 14px; letter-spacing: 1px; font-weight: 400; font-family: 'Space Grotesk';">
+                    <p>SCENARIO: 4-WAY INTELLIGENT NODE | SOURCE: SUMO TraCI SIMULATION</p>
+                </div>
+            </div>
+            <!-- Metrics Grid -->
+            <div class="metrics-grid">
+                <!-- KPI 1: CONGESTION -->
+                <div class="kpi-card" style="border-top: 4px solid #00F3FF;">
+                    <div class="icon-container shadow-congestion">
+                        <i class="fas fa-city color-congestion"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chartCongestion"></canvas>
+                        <div class="percentage-text color-congestion">
+                            <p>-34.2<span class="percentage-symbol">%</span></p>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="kpi-label">
+                            <p>CONGESTION</p>
+                        </div>
+                        <div class="kpi-desc">
+                            <p>Reduction in peak density compared to fixed-time signals.</p>
+                        </div>
+                        <div style="display: flex; justify-content: center; margin-top: 15px;">
+                            <div class="indicator" style="color: #00F3FF; border: 1px solid rgba(0,243,255,0.3);">
+                                <i class="fas fa-microchip"></i>
+                                <p>AI-OPTIMIZED</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KPI 2: DELAY -->
+                <div class="kpi-card" style="border-top: 4px solid #BC13FE;">
+                    <div class="icon-container shadow-delay">
+                        <i class="fas fa-clock color-delay"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chartDelay"></canvas>
+                        <div class="percentage-text color-delay">
+                            <p>-41.8<span class="percentage-symbol">%</span></p>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="kpi-label">
+                            <p>WAIT TIME</p>
+                        </div>
+                        <div class="kpi-desc">
+                            <p>Decrease in vehicle 'Time Loss' inside simulation buffers.</p>
+                        </div>
+                        <div style="display: flex; justify-content: center; margin-top: 15px;">
+                            <div class="indicator" style="color: #BC13FE; border: 1px solid rgba(188,19,254,0.3);">
+                                <i class="fas fa-stopwatch"></i>
+                                <p>BUFFER REDUCTION</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KPI 3: EFFICIENCY -->
+                <div class="kpi-card" style="border-top: 4px solid #00FF9D;">
+                    <div class="icon-container shadow-efficiency">
+                        <i class="fas fa-leaf color-efficiency"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chartEfficiency"></canvas>
+                        <div class="percentage-text color-efficiency">
+                            <p>+27.5<span class="percentage-symbol">%</span></p>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="kpi-label">
+                            <p>THROUGHPUT</p>
+                        </div>
+                        <div class="kpi-desc">
+                            <p>Increase in total vehicle clearance per 120s cycle.</p>
+                        </div>
+                        <div style="display: flex; justify-content: center; margin-top: 15px;">
+                            <div class="indicator" style="color: #00FF9D; border: 1px solid rgba(0,255,157,0.3);">
+                                <i class="fas fa-chart-line"></i>
+                                <p>FLOW INCREASE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KPI 4: EMERGENCY SPEED -->
+                <div class="kpi-card" style="border-top: 4px solid #FF2A6D;">
+                    <div class="icon-container shadow-speed">
+                        <i class="fas fa-ambulance color-speed"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chartSpeed"></canvas>
+                        <div class="percentage-text color-speed">
+                            <p>+58.3<span class="percentage-symbol">%</span></p>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="kpi-label">
+                            <p>RESPONSE SPEED</p>
+                        </div>
+                        <div class="kpi-desc">
+                            <p>Time saved using AI-powered Green Corridor priority.</p>
+                        </div>
+                        <div style="display: flex; justify-content: center; margin-top: 15px;">
+                            <div class="indicator" style="color: #FF2A6D; border: 1px solid rgba(255,42,109,0.3);">
+                                <i class="fas fa-heartbeat"></i>
+                                <p>LIFE-SAVING GAIN</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="deco-line"></div>
+
+        </div>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function (event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+
+</body>
+
+
+</html>

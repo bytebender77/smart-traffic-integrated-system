@@ -1,4 +1,4 @@
-# Smart Mobility Prototype - 8 Minute Presentation Script
+# Smart Traffic Integrated System - 8 Minute Presentation Script
 
 This README gives you a ready-to-speak script for judges, plus a demo runbook.
 

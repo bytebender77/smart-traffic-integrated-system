@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; font-family: "Inter", sans-serif; background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; color: white; }
+
+        .slide-container { position: relative; width: 100%; height: 100%; max-width: 1280px; max-height: 720px; overflow: hidden; background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%); box-shadow: 0 0 100px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); }
+
+        /* Dark overlay with red tint for danger/problem vibe */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 5, 10, 0.85);
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            padding: 60px 80px;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Left Column: Typography */
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(255, 42, 109, 0.15);
+            border: 1px solid #FF2A6D;
+            color: #FF2A6D;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            width: fit-content;
+            margin-bottom: 24px;
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #FF2A6D;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 8px #FF2A6D;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            text-shadow: 2px 2px 0px rgba(255, 42, 109, 0.5);
+        }
+
+        .highlight-red {
+            color: #FF2A6D;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #A0A0A0;
+            font-weight: 300;
+            border-left: 4px solid #FF2A6D;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        /* Right Column: Alert Cards */
+        .alerts-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .alert-card {
+            background-color: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-left: 6px solid #FF2A6D;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transform: skewX(-5deg);
+            /* Techy skew effect */
+            transition: transform 0.3s ease;
+        }
+
+        .alert-card:hover {
+            background-color: rgba(255, 42, 109, 0.1);
+            border-color: #FF2A6D;
+        }
+
+        /* Un-skew content inside */
+        .alert-content-wrapper {
+            transform: skewX(5deg);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 42, 109, 0.1);
+            border: 1px solid rgba(255, 42, 109, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #FF2A6D;
+            box-shadow: 0 0 10px rgba(255, 42, 109, 0.2);
+        }
+
+        .alert-text h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            margin: 0;
+            color: #FFF;
+            letter-spacing: 1px;
+        }
+
+        .alert-text p { margin: 0; color: inherit; }
+
+        /* Tech Decoration Elements */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 42, 109, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 42, 109, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .corner-bracket {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #FF2A6D;
+            z-index: 5;
+            opacity: 0.7;
+        }
+
+        .cb-tl {
+            top: 30px;
+            left: 30px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .cb-br {
+            bottom: 30px;
+            right: 30px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 42, 109, 0.5);
+            opacity: 0.3;
+            z-index: 3;
+            box-shadow: 0 0 10px #FF2A6D;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="slide-container">
+        <div style="position: relative; width: 100%; height: 100%;">
+            <div class="overlay"></div>
+        <div class="grid-overlay"></div>
+        <div class="scan-line"></div>
+        <!-- Decorative Corners -->
+        <div class="corner-bracket cb-tl"></div>
+        <div class="corner-bracket cb-br"></div>
+        <div class="content-wrapper">
+            <!-- Left Side: Header -->
+            <div class="text-column">
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    <p style="margin:0;">SYSTEM STATUS: CRITICAL</p>
+                </div>
+                <h1>
+                    <p style="margin:0;">URBAN TRAFFIC</p>
+                    <p class="highlight-red" style="margin:0;">IS BROKEN</p>
+                </h1>
+                <div class="subtitle">
+                    <p>Current infrastructure cannot keep up with modern city demands.</p>
+                </div>
+            </div>
+            <!-- Right Side: Problem Cards -->
+            <div class="alerts-column">
+                <!-- Card 1 -->
+                <div class="alert-card">
+                    <div class="alert-content-wrapper">
+                        <div class="icon-box">
+                            <i class="fas fa-eye-slash"></i>
+                        </div>
+                        <div class="alert-text">
+                            <h3>REACTIVE SYSTEMS</h3>
+                            <p>Blind spots &amp; delayed responses</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="alert-card">
+                    <div class="alert-content-wrapper">
+                        <div class="icon-box">
+                            <i class="fas fa-traffic-light"></i>
+                        </div>
+                        <div class="alert-text">
+                            <h3>FIXED SIGNALS</h3>
+                            <p>Static timers ignore real demand</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="alert-card">
+                    <div class="alert-content-wrapper">
+                        <div class="icon-box">
+                            <i class="fas fa-truck-medical"></i>
+                        </div>
+                        <div class="alert-text">
+                            <h3 class="highlight-red">EMERGENCY DELAYS</h3>
+                            <p>Ambulances stuck in gridlock</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+        </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('keydown', function(event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%);
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header {
+            z-index: 10;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk';
+            font-size: 42px;
+            font-weight: 700;
+            color: #00F3FF;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+        }
+
+        .content-wrapper {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .intro-text {
+            font-size: 24px;
+            text-align: center;
+            max-width: 900px;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .feature-box {
+            width: 300px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-box i {
+            font-size: 32px;
+            color: #BC13FE;
+            margin-bottom: 20px;
+        }
+
+        .feature-box h3 {
+            font-family: 'Space Grotesk';
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #BC13FE;
+        }
+
+        .feature-box p {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .goal-box {
+            margin-top: 40px;
+            padding: 20px 40px;
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid #00F3FF;
+            border-radius: 40px;
+            font-family: 'Space Grotesk';
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="content-wrapper">
+            <div class="header">
+                <h1>Our Prototype</h1>
+            </div>
+            <p class="intro-text">
+                A unified traffic intelligence platform that leverages real-time data to orchestrate city mobility.
+            </p>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <i class="fas fa-video"></i>
+                    <h3>AI Detection</h3>
+                    <p>Computer vision powered vehicle classification and density mapping.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>City Simulation</h3>
+                    <p>Live digital twin of the traffic ecosystem for predictive modeling.</p>
+                </div>
+                <div class="feature-box" style="border-color: #00FF9D;">
+                    <i class="fas fa-ambulance" style="color: #00FF9D;"></i>
+                    <h3 style="color: #00FF9D;">Emergency Routing</h3>
+                    <p>Congestion-aware paths with synchronized Green Corridor activations.</p>
+                </div>
+            </div>
+            <div class="goal-box">
+                GOAL: REDUCE DELAYS & IMPROVE EMERGENCY RESPONSE
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('keydown', function (event) {
+            if (event.code === 'ArrowRight' || event.code === 'Space') window.location.href = '3.html';
+            else if (event.code === 'ArrowLeft') window.location.href = '1.html';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; font-family: "Inter", sans-serif; background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; color: white; }
+
+        .slide-container { position: relative; width: 100%; height: 100%; max-width: 1280px; max-height: 720px; overflow: hidden; background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%); box-shadow: 0 0 100px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 5, 16, 0.92);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            z-index: 10;
+            margin-top: 30px;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            margin: 0;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #00F3FF;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .badge-hybrid {
+            background: rgba(0, 243, 255, 0.15);
+            border: 1px solid #00F3FF;
+            color: #00F3FF;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        /* Pipeline Container */
+        .pipeline-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            /* Reduced gap for 4 cards */
+            margin-top: 50px;
+            width: 100%;
+            padding: 0 40px;
+        }
+
+        /* Glass Cards */
+        .process-card {
+            position: relative;
+            width: 240px;
+            /* Reduced width for 4 cards */
+            height: 380px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Specific Colors for Stages */
+        /* Stage 1: INPUT (Cyan) */
+        .card-input {
+            border-top: 4px solid #00F3FF;
+        }
+
+        .icon-input {
+            color: #00F3FF;
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
+        }
+
+        .glow-input {
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+
+        .ring-input {
+            border-top-color: #00F3FF;
+            border-left-color: #00F3FF;
+        }
+
+        /* Stage 2: DETECT (Pink) */
+        .card-detect {
+            border-top: 4px solid #FF2A6D;
+        }
+
+        .icon-detect {
+            color: #FF2A6D;
+            text-shadow: 0 0 15px rgba(255, 42, 109, 0.6);
+        }
+
+        .glow-detect {
+            box-shadow: 0 0 20px rgba(255, 42, 109, 0.2);
+        }
+
+        .ring-detect {
+            border-top-color: #FF2A6D;
+            border-left-color: #FF2A6D;
+            animation-direction: reverse;
+        }
+
+        /* Stage 3: DATA (Yellow/Orange) */
+        .card-data {
+            border-top: 4px solid #FFC107;
+        }
+
+        .icon-data {
+            color: #FFC107;
+            text-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+        }
+
+        .glow-data {
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+        }
+
+        .ring-data {
+            border-top-color: #FFC107;
+            border-left-color: #FFC107;
+        }
+
+        /* Stage 4: SIMULATION (Green) */
+        .card-sim {
+            border-top: 4px solid #00FF9D;
+        }
+
+        .icon-sim {
+            color: #00FF9D;
+            text-shadow: 0 0 15px rgba(0, 255, 157, 0.6);
+        }
+
+        .glow-sim {
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+        }
+
+        .ring-sim {
+            border-top-color: #00FF9D;
+            border-left-color: #00FF9D;
+            animation-direction: reverse;
+        }
+
+        /* Icon Wrapper */
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        /* Rotating rings around icons */
+        .ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed transparent;
+            animation: spin 10s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Typography inside cards */
+        .step-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .step-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .step-desc {
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        /* Connecting Arrows */
+        .arrow-connector {
+            flex: 0 0 40px;
+            /* Fixed width arrow */
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-particle {
+            position: absolute;
+            top: 0;
+            left: -20%;
+            width: 40%;
+            height: 100%;
+            background-color: #fff;
+            filter: blur(2px);
+            animation: flow 1.5s linear infinite;
+        }
+
+        @keyframes flow {
+            0% {
+                left: -40%;
+            }
+
+            100% {
+                left: 140%;
+            }
+        }
+
+        /* Bottom Status Bar */
+        .status-bar {
+            position: absolute;
+            bottom: 40px;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .status-icon {
+            color: #00F3FF;
+        }
+
+        /* Animated Grid Background */
+        .grid-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+        }
+
+        /* Bounding Box Animation Overlay in Card 2 */
+        .bbox-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #FF2A6D;
+            opacity: 0.5;
+        }
+    
+        p { margin: 0; color: white; }</style>
+</head>
+
+
+
+<body>
+    <div class="slide-container">
+        <div style="position: relative; width: 100%; height: 100%;">
+            <!-- Backgrounds -->
+        <div class="overlay"></div>
+        <div class="grid-bg"></div>
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <p style="margin:0;">CAMERA INTEGRATION</p>
+            </h1>
+            <div class="subtitle">
+                <p style="margin:0;">Real-World to Digital Twin</p>
+            </div>
+            <div class="badge-hybrid">
+                <p style="margin:0;"><i class="fas fa-link mr-2"></i>Hybrid Input System</p>
+            </div>
+        </div>
+        <!-- Main Flow -->
+        <div class="pipeline-wrapper">
+            <!-- STEP 1: INPUT -->
+            <div class="process-card card-input">
+                <div class="step-num">
+                    <p style="margin:0;">01</p>
+                </div>
+                <div class="icon-wrapper glow-input">
+                    <div class="ring ring-input"></div>
+                    <i class="fas fa-video icon-input"></i>
+                </div>
+                <div class="step-title">
+                    <p style="margin:0;">VIDEO SOURCE</p>
+                </div>
+                <div class="step-desc">
+                    <p style="margin:0;">Ingest <strong>RTSP streams</strong>, webcams, or local files into the
+                        pipeline.</p>
+                </div>
+            </div>
+            <!-- Arrow 1 -->
+            <div class="arrow-connector">
+                <div class="flow-particle" style="background-color: #00F3FF;"></div>
+            </div>
+            <!-- STEP 2: DETECT -->
+            <div class="process-card card-detect">
+                <div class="bbox-overlay"></div>
+                <div class="step-num">
+                    <p style="margin:0;">02</p>
+                </div>
+                <div class="icon-wrapper glow-detect">
+                    <div class="ring ring-detect"></div>
+                    <i class="fas fa-crosshairs icon-detect"></i>
+                </div>
+                <div class="step-title">
+                    <p style="margin:0;">AI DETECTION</p>
+                </div>
+                <div class="step-desc">
+                    <p style="margin:0;"><strong>YOLOv8</strong> identifies vehicles, drawing bounding boxes &amp;
+                        classifying types.</p>
+                </div>
+            </div>
+            <!-- Arrow 2 -->
+            <div class="arrow-connector">
+                <div class="flow-particle" style="background-color: #FF2A6D;"></div>
+            </div>
+            <!-- STEP 3: UPDATE -->
+            <div class="process-card card-data">
+                <div class="step-num">
+                    <p style="margin:0;">03</p>
+                </div>
+                <div class="icon-wrapper glow-data">
+                    <div class="ring ring-data"></div>
+                    <i class="fas fa-database icon-data"></i>
+                </div>
+                <div class="step-title">
+                    <p style="margin:0;">DATA SYNC</p>
+                </div>
+                <div class="step-desc">
+                    <p style="margin:0;">Real-time stats update the <strong>state matrix</strong> with live vehicle
+                        counts.</p>
+                </div>
+            </div>
+            <!-- Arrow 3 -->
+            <div class="arrow-connector">
+                <div class="flow-particle" style="background-color: #FFC107;"></div>
+            </div>
+            <!-- STEP 4: SIMULATION -->
+            <div class="process-card card-sim">
+                <div class="step-num">
+                    <p style="margin:0;">04</p>
+                </div>
+                <div class="icon-wrapper glow-sim">
+                    <div class="ring ring-sim"></div>
+                    <i class="fas fa-city icon-sim"></i>
+                </div>
+                <div class="step-title">
+                    <p style="margin:0;">DIGITAL TWIN</p>
+                </div>
+                <div class="step-desc">
+                    <p style="margin:0;"><strong>SUMO Simulation</strong> mirrors real traffic for predictive control
+                        logic.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Info -->
+        <div class="status-bar">
+            <div class="status-item">
+                <i class="fas fa-video status-icon"></i>
+                <p style="margin:0;">Support: RTSP / HTTP / USB</p>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-microchip status-icon"></i>
+                <p style="margin:0;">Model: YOLOv8 Nano</p>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-bolt status-icon"></i>
+                <p style="margin:0;">Inference: 30 FPS</p>
+            </div>
+        </div>
+
+    
+        </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('keydown', function(event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+
+</body>
+
+
+
+</html>

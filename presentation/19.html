@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; font-family: "Inter", sans-serif; background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; color: white; }
+
+        .slide-container { position: relative; width: 100%; height: 100%; max-width: 1280px; max-height: 720px; overflow: hidden; background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%); box-shadow: 0 0 100px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); }
+
+        .matrix-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), transparent), url('https://www.genspark.ai/api/files/s/4UAgEAjd?cache_control=3600');
+            background-size: cover;
+            opacity: 0.1;
+        }
+
+        .header {
+            z-index: 10;
+            padding: 60px;
+            text-align: left;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk';
+            font-size: 48px;
+            font-weight: 800;
+            color: #00F3FF;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            margin: 0;
+        }
+
+        .data-stream {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 60%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .stream-line {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #BC13FE, transparent);
+            opacity: 0.3;
+            animation: stream-down 4s linear infinite;
+        }
+
+        @keyframes stream-down {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        .refs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 800px;
+            z-index: 10;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .ref-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .ref-card:hover {
+            transform: translateX(10px);
+            border-color: #00F3FF;
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .ref-icon {
+            color: #BC13FE;
+            margin-bottom: 12px;
+            font-size: 24px;
+        }
+
+        h3 {
+            font-family: 'Space Grotesk';
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        p { margin: 0; color: inherit; }
+    </style>
+</head>
+
+
+<body>
+    <div class="slide-container">
+        <div style="position: relative; width: 100%; height: 100%;">
+            <div class="matrix-bg"></div>
+            <div class="data-stream">
+                <div class="stream-line" style="left: 20%; animation-duration: 3s;"></div>
+                <div class="stream-line" style="left: 40%; animation-duration: 5s;"></div>
+                <div class="stream-line" style="left: 60%; animation-duration: 2s;"></div>
+                <div class="stream-line" style="left: 80%; animation-duration: 4s;"></div>
+            </div>
+
+            <div class="header">
+                <h1>RESOURCES &amp; REFERENCES</h1>
+                <p style="color: #888; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px;">Documentation
+                    • Tools • Research</p>
+            </div>
+
+            <div class="refs-grid">
+                <div class="ref-card">
+                    <i class="fas fa-book ref-icon"></i>
+                    <h3>SUMO Documentation</h3>
+                    <p>Microscopic traffic simulation package for modeling urban mobility ecosystems.</p>
+                </div>
+                <div class="ref-card">
+                    <i class="fas fa-brain ref-icon"></i>
+                    <h3>Ultralytics YOLOv8</h3>
+                    <p>SOTA computer vision model used for real-time vehicle detection and occupancy monitoring.</p>
+                </div>
+                <div class="ref-card">
+                    <i class="fas fa-server ref-icon"></i>
+                    <h3>FastAPI Engine</h3>
+                    <p>High-performance Python backend powering the real-time decision loop and Traci-API hooks.</p>
+                </div>
+                <div class="ref-card">
+                    <i class="fas fa-code-branch ref-icon"></i>
+                    <h3>V2X Protocols</h3>
+                    <p>IEEE 802.11p and cellular standards for vehicle-to-infrastructure synchronized communication.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('keydown', function(event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+
+</body>
+
+
+</html>

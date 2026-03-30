@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "Inter", sans-serif;
+            background: #05050a;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden;
+            background: radial-gradient(circle at top right, rgba(0, 243, 255, 0.05), transparent), #05050a;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header {
+            z-index: 10;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk';
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0;
+        }
+
+        .table-container {
+            padding: 0 60px 40px 60px;
+            z-index: 10;
+            position: relative;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        th {
+            font-family: 'Space Grotesk';
+            font-size: 14px;
+            color: #00F3FF;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 10px 20px;
+            text-align: left;
+        }
+
+        td {
+            background: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 18px 20px;
+            font-size: 15px;
+            color: #eee;
+        }
+
+        td:first-child {
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px 0 0 15px;
+            font-weight: 700;
+            font-family: 'Space Grotesk';
+        }
+
+        td:last-child {
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0 15px 15px 0;
+            color: #00FF9D;
+            font-weight: 800;
+        }
+
+        .pill {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: rgba(188, 19, 254, 0.1);
+            border: 1px solid #BC13FE;
+            color: #BC13FE;
+            font-weight: 700;
+        }
+
+        .pill-red {
+            border-color: #ff2a6d;
+            color: #ff2a6d;
+            background: rgba(255, 42, 109, 0.1);
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px dashed rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            text-align: center;
+            font-family: 'Space Grotesk';
+            font-size: 14px;
+            color: #00F3FF;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Backend Logic: Scenario Solver</h1>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Scenario</th>
+                        <th style="width: 20%;">Inputs (A vs B)</th>
+                        <th style="width: 25%;">Logic Applied</th>
+                        <th style="width: 30%;">Resulting Green Split</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Balanced Flow</td>
+                        <td>A: 10 cars | B: 10 cars</td>
+                        <td>Equal Pressure</td>
+                        <td><span class="pill">30s</span> vs <span class="pill">30s</span></td>
+                    </tr>
+                    <tr>
+                        <td>Traffic Stagnation</td>
+                        <td>A: 10 cars (Fast) | B: 10 cars (SLO)</td>
+                        <td>Slowdown Multiplier</td>
+                        <td><span class="pill">20s</span> vs <span class="pill">40s</span></td>
+                    </tr>
+                    <tr>
+                        <td>Sub-Empty Road</td>
+                        <td>A: 0 cars | B: 1 car</td>
+                        <td>Safety Clamp (Min)</td>
+                        <td><span class="pill pill-red">15s</span> vs <span class="pill">45s</span></td>
+                    </tr>
+                    <tr>
+                        <td>Peak Gridlock</td>
+                        <td>A: 50 cars | B: 5 cars</td>
+                        <td>Safety Clamp (Max)</td>
+                        <td><span class="pill pill-red">60s</span> vs <span class="pill">15s</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="footer-note">
+                <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
+                CALCULATION BASE: Pressure = Density × Slowdown Weight | CLAMP BOUNDS [15s - 60s]
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function (event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; font-family: "Inter", sans-serif; background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; color: white; }
+
+        .slide-container { position: relative; width: 100%; height: 100%; max-width: 1280px; max-height: 720px; overflow: hidden; background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%); box-shadow: 0 0 100px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); }
+
+        /* Animated Background Grid */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* Header */
+        .header {
+            z-index: 10;
+            margin-top: 40px;
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            margin: 0;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #BC13FE;
+            letter-spacing: 2px;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Main Architecture Container */
+        .arch-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            width: 100%;
+            padding: 0 40px;
+            z-index: 10;
+            height: 500px;
+        }
+
+        /* Glass Blocks */
+        .arch-block {
+            position: relative;
+            width: 320px;
+            height: 400px;
+            background: rgba(20, 20, 35, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .arch-block:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 30, 50, 0.5);
+        }
+
+        /* Specific Styles */
+        .block-frontend {
+            border-top: 4px solid #00F3FF;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+        }
+
+        .block-backend {
+            border-top: 4px solid #BC13FE;
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.1);
+            height: 440px;
+            /* Slightly taller centerpiece */
+            width: 340px;
+            background: rgba(30, 20, 45, 0.5);
+        }
+
+        .block-sumo {
+            border-top: 4px solid #00FF9D;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
+        }
+
+        /* Icons */
+        .main-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .icon-frontend {
+            color: #00F3FF;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+        }
+
+        .icon-backend {
+            color: #BC13FE;
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.2);
+            font-size: 40px;
+        }
+
+        .icon-sumo {
+            color: #00FF9D;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+        }
+
+        /* Titles */
+        .block-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .block-subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Module List */
+        .module-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .module-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            border-left: 3px solid transparent;
+        }
+
+        .mod-front {
+            border-left-color: #00F3FF;
+        }
+
+        .mod-back {
+            border-left-color: #BC13FE;
+        }
+
+        .mod-sumo {
+            border-left-color: #00FF9D;
+        }
+
+        .module-item i {
+            width: 20px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* Connectors */
+        .connector {
+            flex: 1;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .connector-line {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .data-dot {
+            position: absolute;
+            top: -3px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 10px white;
+        }
+
+        /* Animation for dots */
+        .dot-right {
+            animation: moveRight 2s linear infinite;
+        }
+
+        .dot-left {
+            animation: moveLeft 2s linear infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes moveRight {
+            0% {
+                left: 0;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes moveLeft {
+            0% {
+                left: 100%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                left: 0%;
+                opacity: 0;
+            }
+        }
+
+        .api-label {
+            font-size: 12px;
+            color: #fff;
+            background: rgba(188, 19, 254, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(188, 19, 254, 0.5);
+            margin-bottom: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Decorative Background Elements */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.05);
+            z-index: 1;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .c1 {
+            width: 600px;
+            height: 600px;
+            border-color: rgba(188, 19, 254, 0.1);
+            animation: rotate 60s linear infinite;
+        }
+
+        .c2 {
+            width: 900px;
+            height: 900px;
+            border-color: rgba(0, 243, 255, 0.1);
+            animation: rotate-rev 80s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes rotate-rev {
+            from {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+    
+        p { margin: 0; color: white; }</style>
+</head>
+
+
+
+<body>
+    <div class="slide-container">
+        <div style="position: relative; width: 100%; height: 100%;">
+            <div class="grid-bg"></div>
+            <!-- Background Rings -->
+            <div class="bg-circle c1"></div>
+            <div class="bg-circle c2"></div>
+            <!-- Header -->
+            <div class="header">
+                <h1>
+                    <p>SYSTEM ARCHITECTURE</p>
+                </h1>
+                <div class="subtitle">
+                    <p>Unified Real-Time Control Loop</p>
+                </div>
+            </div>
+            <!-- Architecture Diagram -->
+            <div class="arch-wrapper">
+                <!-- BLOCK 1: FRONTEND -->
+                <div class="arch-block block-frontend">
+                    <div class="main-icon-wrapper icon-frontend">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="block-title">
+                        <p>OPERATOR UI</p>
+                    </div>
+                    <div class="block-subtitle">
+                        <p>React Dashboard</p>
+                    </div>
+                    <div class="module-list">
+                        <div class="module-item mod-front">
+                            <i class="fas fa-map-marked-alt" style="color:#00F3FF"></i>
+                            <p>Live Map View</p>
+                        </div>
+                        <div class="module-item mod-front">
+                            <i class="fas fa-chart-line" style="color:#00F3FF"></i>
+                            <p>Congestion Stats</p>
+                        </div>
+                        <div class="module-item mod-front">
+                            <i class="fas fa-sliders-h" style="color:#00F3FF"></i>
+                            <p>Manual Overrides</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- CONNECTOR 1 -->
+                <div class="connector">
+                    <div class="api-label">
+                        <p>HTTP / WebSocket</p>
+                    </div>
+                    <div class="connector-line">
+                        <div class="data-dot dot-right" style="background: #00F3FF; box-shadow: 0 0 8px #00F3FF;"></div>
+                        <div class="data-dot dot-left" style="background: #BC13FE; box-shadow: 0 0 8px #BC13FE;"></div>
+                    </div>
+                </div>
+                <!-- BLOCK 2: BACKEND (CORE) -->
+                <div class="arch-block block-backend">
+                    <div class="main-icon-wrapper icon-backend">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="block-title">
+                        <p>TRAFFIC AI CORE</p>
+                    </div>
+                    <div class="block-subtitle">
+                        <p>FastAPI Backend</p>
+                    </div>
+                    <div class="module-list">
+                        <div class="module-item mod-back">
+                            <i class="fas fa-video" style="color:#BC13FE"></i>
+                            <p>YOLO Detection</p>
+                        </div>
+                        <div class="module-item mod-back">
+                            <i class="fas fa-calculator" style="color:#BC13FE"></i>
+                            <p>Density Calculation</p>
+                        </div>
+                        <div class="module-item mod-back">
+                            <i class="fas fa-traffic-light" style="color:#BC13FE"></i>
+                            <p>Signal Optimization</p>
+                        </div>
+                        <div class="module-item mod-back">
+                            <i class="fas fa-route" style="color:#BC13FE"></i>
+                            <p>Routing Engine</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- CONNECTOR 2 -->
+                <div class="connector">
+                    <div class="api-label">
+                        <p>TraCI API</p>
+                    </div>
+                    <div class="connector-line">
+                        <div class="data-dot dot-right" style="background: #BC13FE; box-shadow: 0 0 8px #BC13FE;"></div>
+                        <div class="data-dot dot-left" style="background: #00FF9D; box-shadow: 0 0 8px #00FF9D;"></div>
+                    </div>
+                </div>
+                <!-- BLOCK 3: SIMULATION -->
+                <div class="arch-block block-sumo">
+                    <div class="main-icon-wrapper icon-sumo">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <div class="block-title">
+                        <p>SIMULATION</p>
+                    </div>
+                    <div class="block-subtitle">
+                        <p>SUMO / TraCI</p>
+                    </div>
+                    <div class="module-list">
+                        <div class="module-item mod-sumo">
+                            <i class="fas fa-car-side" style="color:#00FF9D"></i>
+                            <p>Vehicle Physics</p>
+                        </div>
+                        <div class="module-item mod-sumo">
+                            <i class="fas fa-code-branch" style="color:#00FF9D"></i>
+                            <p>Junction Control</p>
+                        </div>
+                        <div class="module-item mod-sumo">
+                            <i class="fas fa-database" style="color:#00FF9D"></i>
+                            <p>Traffic State</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        
+    </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('keydown', function(event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+
+</body>
+
+
+
+</html>

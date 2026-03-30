@@ -119,7 +119,7 @@ export default function LandingPage() {
             <Radio size={14} className="text-black" />
           </div>
           <span className="font-semibold tracking-tight" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-            SMART MOBILITY (PROTOTYPE)
+            SMART TRAFFIC SYSTEM
           </span>
         </div>
         <div className="hidden md:flex items-center bg-[#161b22] border border-white/10 rounded-full px-4 py-2 w-96">
@@ -152,7 +152,7 @@ export default function LandingPage() {
           </div>
           <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50"
             style={{ fontFamily: "'Orbitron', sans-serif" }}>
-            Traffic Management AI
+            Traffic Intelligence AI
           </h1>
           <p className="text-xl text-blue-200/80 max-w-2xl mx-auto font-light leading-relaxed">
             Dynamic Traffic Flow Optimizer & Emergency Grid. <br />

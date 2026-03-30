@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "Inter", sans-serif;
+            background: #05050a;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header {
+            z-index: 10;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk';
+            font-size: 42px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0;
+        }
+
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: #00F3FF;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* The Architecture Core */
+        .stack-wrapper {
+            position: relative;
+            width: 1000px;
+            height: 500px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hub-container {
+            position: relative;
+            z-index: 5;
+            width: 220px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hub-ring {
+            position: absolute;
+            inset: 0;
+            border: 3px dashed rgba(0, 243, 255, 0.3);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+
+        .hub-core {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            background: rgba(0, 243, 255, 0.1);
+            border: 2px solid #00F3FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.3);
+        }
+
+        .hub-core i {
+            font-size: 50px;
+            color: #00F3FF;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+        }
+
+        /* Tech Nodes */
+        .tech-node {
+            position: absolute;
+            width: 220px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .tech-node:hover {
+            transform: translateY(-10px);
+            border-color: #00F3FF;
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .node-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .node-title {
+            font-family: 'Space Grotesk';
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .node-tech {
+            font-family: 'Space Grotesk';
+            font-size: 14px;
+            color: #00F3FF;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .node-tl {
+            top: 0;
+            left: 50px;
+        }
+
+        .node-tr {
+            top: 0;
+            right: 50px;
+        }
+
+        .node-bl {
+            bottom: 0;
+            left: 50px;
+        }
+
+        .node-br {
+            bottom: 0;
+            right: 50px;
+        }
+
+        /* SVG Connections */
+        svg.connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .data-path {
+            stroke: rgba(255, 255, 255, 0.05);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .data-particle {
+            fill: #00F3FF;
+            filter: drop-shadow(0 0 5px #00F3FF);
+        }
+
+        .bottom-bar {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: #00FF9D;
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #00FF9D;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00FF9D;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Technology Stack</h1>
+            <div class="accent-line"></div>
+        </div>
+
+        <div class="stack-wrapper">
+            <!-- Connections -->
+            <svg class="connections" viewBox="0 0 1000 500">
+                <!-- TL -->
+                <path class="data-path" d="M160,100 L500,250" />
+                <circle r="3" class="data-particle">
+                    <animateMotion dur="2.5s" path="M160,100 L500,250" repeatCount="indefinite" />
+                </circle>
+                <!-- TR -->
+                <path class="data-path" d="M840,100 L500,250" />
+                <circle r="3" class="data-particle">
+                    <animateMotion dur="2.8s" path="M840,100 L500,250" repeatCount="indefinite" />
+                </circle>
+                <!-- BL -->
+                <path class="data-path" d="M160,400 L500,250" />
+                <circle r="3" class="data-particle">
+                    <animateMotion dur="3s" path="M160,400 L500,250" repeatCount="indefinite" />
+                </circle>
+                <!-- BR -->
+                <path class="data-path" d="M840,400 L500,250" />
+                <circle r="3" class="data-particle">
+                    <animateMotion dur="2.2s" path="M840,400 L500,250" repeatCount="indefinite" />
+                </circle>
+            </svg>
+
+            <!-- Hub -->
+            <div class="hub-container">
+                <div class="hub-ring"></div>
+                <div class="hub-core">
+                    <i class="fas fa-microchip"></i>
+                </div>
+            </div>
+
+            <!-- Nodes -->
+            <div class="tech-node node-tl">
+                <i class="fas fa-eye node-icon" style="color: #00F3FF;"></i>
+                <div class="node-title">AI Vision</div>
+                <div class="node-tech">YOLOv8</div>
+            </div>
+            <div class="tech-node node-tr">
+                <i class="fas fa-project-diagram node-icon" style="color: #BC13FE;"></i>
+                <div class="node-title">Traffic Engine</div>
+                <div class="node-tech">ECLIPSE SUMO</div>
+            </div>
+            <div class="tech-node node-bl">
+                <i class="fas fa-code node-icon" style="color: #00FF9D;"></i>
+                <div class="node-title">Decision Logic</div>
+                <div class="node-tech">FAST API / PY</div>
+            </div>
+            <div class="tech-node node-br">
+                <i class="fas fa-desktop node-icon" style="color: #ff2a6d;"></i>
+                <div class="node-title">Frontend UI</div>
+                <div class="node-tech">REACT / TAILWIND</div>
+            </div>
+        </div>
+
+        <div class="bottom-bar">
+            <div class="status-pill">
+                <div class="dot"></div>
+                INTEGRATED HACKATHON STACK v2.0
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function (event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+</body>
+
+</html>

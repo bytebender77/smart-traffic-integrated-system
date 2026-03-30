@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "Inter", sans-serif;
+            background: #05050a;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden;
+            background: radial-gradient(circle at top right, rgba(0, 243, 255, 0.05), transparent), #05050a;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header {
+            z-index: 10;
+            padding-top: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk';
+            font-size: 42px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin: 0;
+        }
+
+        .content-wrapper {
+            padding: 40px 60px;
+            z-index: 10;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Infographic Logic */
+        .evo-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px 50px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .evo-box {
+            text-align: center;
+        }
+
+        .evo-box i {
+            font-size: 40px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .evo-box span {
+            display: block;
+            font-family: 'Space Grotesk';
+            font-size: 18px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        .evo-arrow {
+            font-size: 32px;
+            color: #ff2a6d;
+            animation: pulseArrow 1.5s infinite;
+        }
+
+        .evo-box.new i {
+            color: #00F3FF;
+            filter: drop-shadow(0 0 15px #00F3FF);
+        }
+
+        .evo-box.new span {
+            color: #00F3FF;
+            font-weight: 800;
+        }
+
+        @keyframes pulseArrow {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+        }
+
+        .features-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-item i {
+            font-size: 36px;
+            color: #BC13FE;
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            font-family: 'Space Grotesk';
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            font-size: 13px;
+            color: #777;
+            line-height: 1.4;
+        }
+
+        .soundbite {
+            width: 100%;
+            background: linear-gradient(90deg, rgba(255, 42, 109, 0.1), rgba(188, 19, 254, 0.1));
+            border-left: 5px solid #ff2a6d;
+            padding: 20px 40px;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .soundbite p {
+            font-family: 'Space Grotesk';
+            font-size: 20px;
+            color: #fff;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .soundbite i {
+            color: #ff2a6d;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="content-wrapper">
+            <div class="header">
+                <h1>Logic Evolution</h1>
+            </div>
+
+            <!-- Evolution Infographic -->
+            <div class="evo-container">
+                <div class="evo-box">
+                    <i class="fas fa-car-side"></i>
+                    <span>VEHICLE COUNT</span>
+                </div>
+                <i class="fas fa-chevron-right evo-arrow"></i>
+                <div class="evo-box new">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>TRAFFIC PRESSURE</span>
+                </div>
+            </div>
+
+            <!-- Features Infographic -->
+            <div class="features-row">
+                <div class="feature-item">
+                    <i class="fas fa-wind"></i>
+                    <h3>Speed Estimation</h3>
+                    <p>Uses Greenshields Model to infer flow speed from density.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-weight-hanging"></i>
+                    <h3>Stagnation Priority</h3>
+                    <p>Slower lanes get higher Pressure (%) and longer green time.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-search-plus"></i>
+                    <h3>Explainable AI</h3>
+                    <p>Back-end logic is visible in UI: Speed vs. Pressure.</p>
+                </div>
+            </div>
+
+            <!-- The Soundbite -->
+            <div class="soundbite">
+                <p><i class="fas fa-quote-left"></i> Earlier we optimized by COUNT. Now we optimize by PRESSURE (Density
+                    + Slowdown). We clear STAGNANT lanes first.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('keydown', function (event) {
+            if (event.code === 'ArrowRight' || event.code === 'Space') window.location.href = '14.html';
+            else if (event.code === 'ArrowLeft') window.location.href = '12.html';
+        });
+    </script>
+</body>
+
+</html>

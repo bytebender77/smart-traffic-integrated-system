@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Smart Mobility Presentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "Inter", sans-serif;
+            background: #05050a;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden;
+            background: radial-gradient(circle at bottom center, rgba(188, 19, 254, 0.05), transparent), #05050a;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header {
+            z-index: 10;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk';
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0;
+        }
+
+        .roadmap-container {
+            padding: 10px 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* The Connection Line */
+        .roadmap-container::before {
+            content: "";
+            position: absolute;
+            left: 127px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #BC13FE, #00F3FF, #ff2a6d);
+            opacity: 0.3;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateX(20px);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .step-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(188, 19, 254, 0.1);
+            border: 2px solid #BC13FE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 20;
+        }
+
+        .step-icon i {
+            font-size: 24px;
+            color: #BC13FE;
+        }
+
+        .step-2 .step-icon {
+            border-color: #00F3FF;
+            background: rgba(0, 243, 255, 0.1);
+        }
+
+        .step-2 .step-icon i {
+            color: #00F3FF;
+        }
+
+        .step-3 .step-icon {
+            border-color: #ff2a6d;
+            background: rgba(255, 42, 109, 0.1);
+        }
+
+        .step-3 .step-icon i {
+            color: #ff2a6d;
+        }
+
+        .step-4 .step-icon {
+            border-color: #00FF9D;
+            background: rgba(0, 255, 157, 0.1);
+        }
+
+        .step-4 .step-icon i {
+            color: #00FF9D;
+        }
+
+        .step-info b {
+            display: block;
+            font-family: 'Space Grotesk';
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .step-info p {
+            font-size: 14px;
+            color: #888;
+            margin: 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Roadmap to Production</h1>
+        </div>
+
+        <div class="roadmap-container">
+            <div class="step step-1">
+                <div class="step-icon"><i class="fas fa-database"></i></div>
+                <div class="step-info">
+                    <b>Distributed Persistence</b>
+                    <p>Move in-memory state to <b>Redis/PostgreSQL</b> for global synchronization across city nodes.</p>
+                </div>
+            </div>
+
+            <div class="step step-2">
+                <div class="step-icon"><i class="fas fa-tasks"></i></div>
+                <div class="step-info">
+                    <b>Async Inference Pipeline</b>
+                    <p>Put heavy computer-vision tasks into <b>Celery/Kafka</b> workers for high-volume non-blocking
+                        flow.</p>
+                </div>
+            </div>
+
+            <div class="step step-3">
+                <div class="step-icon"><i class="fas fa-microchip"></i></div>
+                <div class="step-info">
+                    <b>GPU Microservices</b>
+                    <p>Serve model inference as separate micro-services using dedicated <b>GPU clusters</b>.</p>
+                </div>
+            </div>
+
+            <div class="step step-4">
+                <div class="step-icon"><i class="fas fa-shield-virus"></i></div>
+                <div class="step-info">
+                    <b>Management Layer</b>
+                    <p>Add <b>API Gateways</b>, Rate Limiting, and <b>Prometheus/Grafana</b> for enterprise-grade
+                        observability.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('keydown', function (event) {
+            const currentPath = window.location.pathname;
+            const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1) || '1.html';
+            const currentNum = parseInt(currentFile.split('.')[0]) || 1;
+            let nextNum;
+            if (event.code === 'ArrowRight' || event.code === 'Space') {
+                nextNum = currentNum + 1;
+                if (nextNum <= 20) window.location.href = nextNum + '.html';
+            } else if (event.code === 'ArrowLeft') {
+                nextNum = currentNum - 1;
+                if (nextNum >= 1) window.location.href = nextNum + '.html';
+            }
+        });
+    </script>
+</body>
+
+</html>
