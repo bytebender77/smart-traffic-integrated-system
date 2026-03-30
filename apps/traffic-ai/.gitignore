@@ -1,0 +1,37 @@
+# Traffic AI Optimizer — keep training artifacts and temp files out of git
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.env
+.venv/
+venv/
+.DS_Store
+
+# Model weights (large files)
+*.pt
+*.onnx
+models/*.pt
+models/*.onnx
+
+# Data videos (large files)
+data/sample_videos/*.mp4
+data/sample_videos/*.avi
+data/sample_videos/*.mov
+data/uploads/
+
+# Node
+node_modules/
+package-lock.json
+
+# Generated slides
+slides/
+
+# Database
+data/*.db
+
+# IDE
+.vscode/
+.idea/
+.gemini/
+backend.log

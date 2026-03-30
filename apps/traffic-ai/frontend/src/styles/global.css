@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @apply bg-midnight text-white font-display;
+  min-height: 100vh;
+  background-image: radial-gradient(circle at top, rgba(29, 78, 216, 0.14), transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(22, 163, 74, 0.10), transparent 45%);
+  background-attachment: fixed;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.dashboard-shell {
+  @apply relative min-h-screen bg-grid bg-[size:36px_36px];
+}
+
+.glass {
+  @apply bg-white/5 border border-white/10 backdrop-blur-xl;
+}
+
+.neon-border {
+  box-shadow: 0 0 0 1px rgba(29, 78, 216, 0.32), 0 0 18px rgba(29, 78, 216, 0.12);
+}
+
+.map-shell {
+  @apply rounded-2xl overflow-hidden border border-white/10 shadow-glow;
+  height: 420px;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: #0a1222;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.card-title {
+  @apply text-sm uppercase tracking-[0.2em] text-white/60;
+}
+
+.stat-value {
+  @apply text-3xl font-semibold text-white;
+}
+
+.badge {
+  @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest;
+}
+
+.badge-success {
+  @apply bg-neon-lime/10 text-neon-lime border border-neon-lime/30;
+}
+
+.badge-warning {
+  @apply bg-neon-amber/10 text-neon-amber border border-neon-amber/30;
+}
+
+.badge-danger {
+  @apply bg-neon-red/10 text-neon-red border border-neon-red/30;
+}
+
+.badge-info {
+  @apply bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/30;
+}
+
+.signal-pill {
+  @apply rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest;
+}
+
+.signal-green {
+  @apply bg-neon-lime/20 text-neon-lime;
+}
+
+.signal-red {
+  @apply bg-neon-red/20 text-neon-red;
+}
+
+.signal-yellow {
+  @apply bg-neon-amber/20 text-neon-amber;
+}

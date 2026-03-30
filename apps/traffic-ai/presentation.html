@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>India Innovates 2026 — Traffic AI</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* ═══════════════════════════ RESET & BASE ═══════════════════════════ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #030712;
+            --bg2: #0a0e1a;
+            --card: rgba(15, 23, 42, 0.7);
+            --border: rgba(255, 255, 255, 0.06);
+            --green: #00ff87;
+            --blue: #00b4ff;
+            --red: #ff3b5c;
+            --yellow: #ffd600;
+            --cyan: #22d3ee;
+            --purple: #a855f7;
+            --text: #f1f5f9;
+            --text2: #94a3b8;
+            --text3: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ═══════════════════════════ SLIDE CONTAINER ═══════════════════════════ */
+        .slides-wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* ═══════════════════════════ BACKGROUNDS ═══════════════════════════ */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .slide-1::before {
+            background:
+                radial-gradient(ellipse 90% 60% at 50% 40%, rgba(0, 180, 255, 0.12), transparent),
+                radial-gradient(ellipse 60% 70% at 80% 20%, rgba(0, 255, 135, 0.08), transparent),
+                linear-gradient(135deg, #030712 0%, #0a0e1a 50%, #030712 100%);
+        }
+
+        .slide-2::before {
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 80%, rgba(255, 59, 92, 0.10), transparent),
+                radial-gradient(ellipse 60% 60% at 70% 30%, rgba(255, 214, 0, 0.06), transparent),
+                var(--bg);
+        }
+
+        .slide-3::before {
+            background:
+                radial-gradient(ellipse 70% 60% at 60% 50%, rgba(0, 255, 135, 0.10), transparent),
+                radial-gradient(ellipse 50% 50% at 20% 20%, rgba(0, 180, 255, 0.08), transparent),
+                var(--bg);
+        }
+
+        .slide-4::before {
+            background:
+                radial-gradient(ellipse 90% 50% at 50% 50%, rgba(168, 85, 247, 0.08), transparent),
+                radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0, 180, 255, 0.06), transparent),
+                var(--bg);
+        }
+
+        .slide-5::before {
+            background:
+                radial-gradient(ellipse 80% 60% at 40% 40%, rgba(34, 211, 238, 0.08), transparent),
+                radial-gradient(ellipse 50% 50% at 70% 70%, rgba(0, 255, 135, 0.06), transparent),
+                var(--bg);
+        }
+
+        .slide-6::before {
+            background:
+                radial-gradient(ellipse 70% 60% at 50% 40%, rgba(0, 180, 255, 0.10), transparent),
+                radial-gradient(ellipse 60% 50% at 20% 70%, rgba(255, 214, 0, 0.06), transparent),
+                var(--bg);
+        }
+
+        .slide-7::before {
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 50%, rgba(168, 85, 247, 0.08), transparent),
+                var(--bg);
+        }
+
+        .slide-8::before {
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 50%, rgba(0, 255, 135, 0.12), transparent),
+                radial-gradient(ellipse 60% 40% at 30% 30%, rgba(0, 180, 255, 0.10), transparent),
+                var(--bg);
+        }
+
+        /* ═══════════════════════════ TYPOGRAPHY ═══════════════════════════ */
+        .font-display {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 32px;
+            right: 48px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            color: var(--text3);
+        }
+
+        .event-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            padding: 8px 20px;
+            border-radius: 100px;
+            background: rgba(0, 180, 255, 0.08);
+            border: 1px solid rgba(0, 180, 255, 0.2);
+            color: var(--blue);
+            margin-bottom: 28px;
+        }
+
+        .title-main {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(42px, 6vw, 80px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, var(--blue) 50%, var(--green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .title-sub {
+            font-size: clamp(16px, 2vw, 22px);
+            color: var(--text2);
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .section-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            color: var(--blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 28px;
+            height: 2px;
+            background: var(--blue);
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        .section-body {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text2);
+            max-width: 900px;
+        }
+
+        /* ═══════════════════════════ CARDS & GRIDS ═══════════════════════════ */
+        .card-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 32px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .card-grid.cols-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .card-grid.cols-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .card-grid.cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 180, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .card h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        /* ═══════════════════════════ ARCHITECTURE ═══════════════════════════ */
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 36px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .arch-node {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 24px;
+            text-align: center;
+            min-width: 140px;
+            backdrop-filter: blur(12px);
+        }
+
+        .arch-node .icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .arch-node .label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--text2);
+        }
+
+        .arch-arrow {
+            font-size: 24px;
+            color: var(--blue);
+            opacity: 0.5;
+        }
+
+        .arch-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 28px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .arch-detail {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(12px);
+        }
+
+        .arch-detail h5 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .arch-detail p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--text3);
+        }
+
+        /* ═══════════════════════════ TECH PILLS ═══════════════════════════ */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .tech-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            backdrop-filter: blur(12px);
+        }
+
+        .tech-item .tech-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .tech-item h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .tech-item p {
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        /* ═══════════════════════════ TEAM INFO ═══════════════════════════ */
+        .team-info {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .team-info .label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--text3);
+            margin-bottom: 12px;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .team-member {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 24px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .team-member span {
+            color: var(--text3);
+            font-size: 11px;
+            font-weight: 400;
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* ═══════════════════════════ REFERENCES ═══════════════════════════ */
+        .ref-list {
+            margin-top: 28px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .ref-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+            backdrop-filter: blur(12px);
+        }
+
+        .ref-item .ref-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .ref-item .ref-text h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .ref-item .ref-text p {
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        /* ═══════════════════════════ THANK YOU ═══════════════════════════ */
+        .thank-you-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(48px, 8vw, 100px);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--green) 0%, var(--blue) 50%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--text2);
+            font-style: italic;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════ NAVIGATION ═══════════════════════════ */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 48px;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text3);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            opacity: 1;
+            background: var(--blue);
+            box-shadow: 0 0 12px rgba(0, 180, 255, 0.5);
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        .nav-btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            padding: 10px 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 180, 255, 0.1);
+            border-color: rgba(0, 180, 255, 0.3);
+            color: var(--blue);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-counter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            color: var(--text3);
+            letter-spacing: 0.1em;
+        }
+
+        /* ═══════════════════════════ STAT HIGHLIGHT ═══════════════════════════ */
+        .stat-row {
+            display: flex;
+            gap: 40px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text3);
+            margin-top: 4px;
+            letter-spacing: 0.08em;
+        }
+
+        /* ═══════════════════════════ ANIMATIONS ═══════════════════════════ */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 180, 255, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(0, 180, 255, 0.4);
+            }
+        }
+
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* ═══════════════════════════ BULLET LIST ═══════════════════════════ */
+        .bullet-list {
+            list-style: none;
+            margin-top: 20px;
+            max-width: 800px;
+        }
+
+        .bullet-list li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        .bullet-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--blue);
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .highlight-blue {
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .highlight-red {
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .highlight-yellow {
+            color: var(--yellow);
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════ SLIDE LEFT ALIGN ═══════════════════════════ */
+        .slide-left {
+            align-items: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slides-wrapper">
+
+        <!-- ════════════════════ SLIDE 1: TITLE ════════════════════ -->
+        <div class="slide slide-1 active" data-slide="1">
+            <span class="slide-number">01 / 08</span>
+            <div class="event-badge">INDIA INNOVATES 2026</div>
+            <h1 class="title-main" style="text-align:center;">Traffic AI Optimizer</h1>
+            <p class="title-sub">
+                AI-powered smart city traffic signal optimization and emergency green corridor system.
+            </p>
+
+            <div class="stat-row">
+                <div class="stat-item float" style="animation-delay: 0s;">
+                    <div class="stat-value" style="color: var(--green);">CV</div>
+                    <div class="stat-label">Vehicle Detection</div>
+                </div>
+                <div class="stat-item float" style="animation-delay: 0.5s;">
+                    <div class="stat-value" style="color: var(--blue);">AI</div>
+                    <div class="stat-label">Adaptive Signals</div>
+                </div>
+                <div class="stat-item float" style="animation-delay: 1s;">
+                    <div class="stat-value" style="color: var(--red);">EMS</div>
+                    <div class="stat-label">Emergency Corridor</div>
+                </div>
+            </div>
+
+            <div class="team-info">
+                <div class="label">TEAM NAME</div>
+                <div class="team-members">
+                    <div class="team-member">[Your Team Name]</div>
+                </div>
+
+                <div class="label" style="margin-top: 18px;">MEMBERS &amp; AFFILIATION</div>
+                <div class="team-members">
+                    <div class="team-member">
+                        Member Name
+                        <span>Role / Affiliation</span>
+                    </div>
+                    <div class="team-member">
+                        Member Name
+                        <span>Role / Affiliation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ SLIDE 2: PROBLEM STATEMENT ════════════════════ -->
+        <div class="slide slide-2 slide-left" data-slide="2">
+            <span class="slide-number">02 / 08</span>
+            <div class="section-label">PROBLEM STATEMENT</div>
+            <h2 class="section-title">Static Signals in a Dynamic City</h2>
+            <p class="section-body">
+                Urban traffic changes minute by minute, but most intersections still rely on fixed-timer plans or
+                manual overrides. The result is avoidable congestion, inefficient signal cycles, and delayed
+                emergency response. Cities need real-time visibility and adaptive control that can scale across
+                intersections.
+            </p>
+
+            <ul class="bullet-list">
+                <li>Lane-by-lane demand is ignored, creating unnecessary queues and spillback.</li>
+                <li>Emergency vehicles have no automatic priority and lose critical time at red lights.</li>
+                <li>Operators lack a single live view of traffic density and signal performance.</li>
+            </ul>
+
+            <div class="card-grid cols-3" style="margin-top: 30px;">
+                <div class="card">
+                    <div class="card-icon" style="background: rgba(255,59,92,0.1);">ST</div>
+                    <h4 style="color: var(--red);">STATIC TIMING</h4>
+                    <p>Fixed cycles do not reflect real traffic demand, causing idle greens in empty lanes and
+                        long waits in busy ones.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: rgba(255,214,0,0.1);">EMS</div>
+                    <h4 style="color: var(--yellow);">EMERGENCY DELAYS</h4>
+                    <p>Ambulances and fire trucks depend on manual coordination instead of automated corridor
+                        clearance.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: rgba(168,85,247,0.1);">DATA</div>
+                    <h4 style="color: var(--purple);">LIMITED INSIGHT</h4>
+                    <p>Traffic decisions are often based on periodic surveys rather than live, high-resolution
+                        analytics.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ SLIDE 3: SOLUTION ════════════════════ -->
+        <div class="slide slide-3 slide-left" data-slide="3">
+            <span class="slide-number">03 / 08</span>
+            <div class="section-label">SOLUTION</div>
+            <h2 class="section-title">Traffic AI Optimizer</h2>
+            <p class="section-body">
+                Traffic AI Optimizer delivers an end-to-end pipeline that connects computer vision directly to
+                signal control. YOLOv8 detects vehicles from video feeds, weighted density metrics translate
+                counts into congestion levels, and an adaptive signal optimizer allocates green time fairly
+                across lanes. When an emergency vehicle is detected, the system computes the fastest route and
+                activates a green corridor automatically.
+            </p>
+
+            <div class="card-grid cols-2" style="margin-top: 30px;">
+                <div class="card">
+                    <div class="card-icon" style="background: rgba(0,255,135,0.1);">CV</div>
+                    <h4 style="color: var(--green);">REAL-TIME VEHICLE DETECTION</h4>
+                    <p>YOLOv8 + OpenCV classify cars, buses, trucks, and motorcycles and stream annotated
+                        frames to the dashboard.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: rgba(0,180,255,0.1);">AI</div>
+                    <h4 style="color: var(--blue);">ADAPTIVE SIGNAL TIMING</h4>
+                    <p>Density-driven optimizer distributes green time proportionally with minimum guarantees
+                        and severe-congestion priority.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: rgba(255,214,0,0.1);">ROUTE</div>
+                    <h4 style="color: var(--yellow);">EMERGENCY GREEN CORRIDOR</h4>
+                    <p>Emergency detection triggers shortest-path routing and signal overrides along the
+                        corridor to speed response.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: rgba(168,85,247,0.1);">OPS</div>
+                    <h4 style="color: var(--purple);">OPERATOR CONTROL CENTER</h4>
+                    <p>React and Streamlit dashboards provide live maps, signal plans, video ingestion, and
+                        one-click demos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ SLIDE 4: ARCHITECTURE ════════════════════ -->
+        <div class="slide slide-4" data-slide="4">
+            <span class="slide-number">04 / 08</span>
+            <div class="section-label">ARCHITECTURE</div>
+            <h2 class="section-title" style="text-align:center;">System Design and Data Flow</h2>
+
+            <div class="arch-flow">
+                <div class="arch-node" style="border-color: rgba(0,180,255,0.3);">
+                    <div class="icon">IN</div>
+                    <div class="label" style="color: var(--blue);">CCTV / VIDEO / RTSP</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node" style="border-color: rgba(0,255,135,0.3);">
+                    <div class="icon">CV</div>
+                    <div class="label" style="color: var(--green);">VISION: YOLOv8 + OPENCV</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node" style="border-color: rgba(255,214,0,0.3);">
+                    <div class="icon">DEN</div>
+                    <div class="label" style="color: var(--yellow);">DENSITY + CONGESTION</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node" style="border-color: rgba(168,85,247,0.3);">
+                    <div class="icon">SIG</div>
+                    <div class="label" style="color: var(--purple);">SIGNAL OPTIMIZER</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node" style="border-color: rgba(255,59,92,0.3);">
+                    <div class="icon">EMS</div>
+                    <div class="label" style="color: var(--red);">EMERGENCY ROUTER</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node" style="border-color: rgba(34,211,238,0.3);">
+                    <div class="icon">API</div>
+                    <div class="label" style="color: var(--cyan);">FASTAPI + DASHBOARDS</div>
+                </div>
+            </div>
+
+            <div class="arch-detail-grid">
+                <div class="arch-detail" style="border-color: rgba(0,180,255,0.15);">
+                    <h5 style="color: var(--blue);">VISION MODULE</h5>
+                    <p>YOLOv8 detection with per-frame vehicle counts, confidence filtering, and annotated frame
+                        streaming.</p>
+                </div>
+                <div class="arch-detail" style="border-color: rgba(0,255,135,0.15);">
+                    <h5 style="color: var(--green);">DENSITY CALCULATOR</h5>
+                    <p>PCU-weighted load estimation and congestion classification for single lanes and
+                        intersections.</p>
+                </div>
+                <div class="arch-detail" style="border-color: rgba(168,85,247,0.15);">
+                    <h5 style="color: var(--purple);">SIGNAL OPTIMIZER</h5>
+                    <p>Proportional green allocation with minimum guarantees and severe-congestion priority,
+                        plus rotation sequences.</p>
+                </div>
+                <div class="arch-detail" style="border-color: rgba(255,59,92,0.15);">
+                    <h5 style="color: var(--red);">EMERGENCY CORRIDOR</h5>
+                    <p>Dijkstra shortest-path routing on a city graph and signal overrides for corridor control.</p>
+                </div>
+                <div class="arch-detail" style="border-color: rgba(255,214,0,0.15);">
+                    <h5 style="color: var(--yellow);">FASTAPI LAYER</h5>
+                    <p>Typed endpoints for detection, density, signals, emergency checks, uploads, and system
+                        status.</p>
+                </div>
+                <div class="arch-detail" style="border-color: rgba(34,211,238,0.15);">
+                    <h5 style="color: var(--cyan);">FRONTEND + OPS</h5>
+                    <p>React control center with Leaflet and Recharts plus a Streamlit admin dashboard for
+                        rapid demos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ SLIDE 5: TECHNOLOGY USED ════════════════════ -->
+        <div class="slide slide-5 slide-left" data-slide="5">
+            <span class="slide-number">05 / 08</span>
+            <div class="section-label">TECHNOLOGY USED</div>
+            <h2 class="section-title">Tech Stack</h2>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(0,180,255,0.1);">PY</div>
+                    <div>
+                        <h4>Python + FastAPI</h4>
+                        <p>Backend orchestration and REST APIs</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(0,255,135,0.1);">YOLO</div>
+                    <div>
+                        <h4>Ultralytics YOLOv8</h4>
+                        <p>Real-time vehicle and emergency detection</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(255,214,0,0.1);">CV</div>
+                    <div>
+                        <h4>OpenCV</h4>
+                        <p>Video processing and frame annotation</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(168,85,247,0.1);">NX</div>
+                    <div>
+                        <h4>NetworkX</h4>
+                        <p>Graph routing and shortest-path corridor planning</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(34,211,238,0.1);">RE</div>
+                    <div>
+                        <h4>React 18 + Vite</h4>
+                        <p>High-performance operator dashboard</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(255,59,92,0.1);">TW</div>
+                    <div>
+                        <h4>Tailwind CSS</h4>
+                        <p>Utility-first styling and layout system</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(0,180,255,0.1);">ST</div>
+                    <div>
+                        <h4>Zustand</h4>
+                        <p>Lightweight state management for live data</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(0,255,135,0.1);">MAP</div>
+                    <div>
+                        <h4>Leaflet + OpenStreetMap</h4>
+                        <p>Interactive city map visualization</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon" style="background: rgba(255,214,0,0.1);">OPS</div>
+                    <div>
+                        <h4>Streamlit + Recharts</h4>
+                        <p>Admin dashboard and analytics charts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ SLIDE 6: FEATURES / USP ════════════════════ -->
+        <div class="slide slide-6 slide-left" data-slide="6">
+            <span class="slide-number">06 / 08</span>
+            <div class="section-label">FEATURES / USP</div>
+            <h2 class="section-title">Why It Wins</h2>
+
+            <div class="card-grid cols-2" style="max-width: 1000px;">
+                <div class="card" style="border-left: 3px solid var(--green);">
+                    <h4 style="color: var(--green);">REAL-TIME VISION</h4>
+                    <p>YOLOv8 counts and classifies vehicles from CCTV, uploads, or RTSP streams with live
+                        overlays.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--blue);">
+                    <h4 style="color: var(--blue);">ADAPTIVE SIGNAL ENGINE</h4>
+                    <p>Signal timings adjust every cycle based on measured density, ensuring fairness and
+                        throughput.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--red);">
+                    <h4 style="color: var(--red);">EMERGENCY PRIORITY</h4>
+                    <p>Automatic corridor activation routes emergency vehicles on the fastest path and locks
+                        signals to green.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--yellow);">
+                    <h4 style="color: var(--yellow);">LIVE MAP + ANALYTICS</h4>
+                    <p>Interactive map highlights congestion and corridor routing with real-time stats panels.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--purple);">
+                    <h4 style="color: var(--purple);">VIDEO INGESTION + STREAMING</h4>
+                    <p>Upload video, run full analytics, and stream annotated frames via FastAPI endpoints.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--cyan);">
+                    <h4 style="color: var(--cyan);">MODULAR AND DEMO-READY</h4>
+                    <p>Independent modules with a scripted demo pipeline make it easy to scale and showcase.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ SLIDE 7: REFERENCES / LINKS ════════════════════ -->
+        <div class="slide slide-7 slide-left" data-slide="7">
+            <span class="slide-number">07 / 08</span>
+            <div class="section-label">REFERENCES / LINKS</div>
+            <h2 class="section-title">Resources and Links</h2>
+
+            <div class="ref-list">
+                <div class="ref-item">
+                    <div class="ref-icon">REPO</div>
+                    <div class="ref-text">
+                        <h4>Project Repository</h4>
+                        <p>Add your GitHub URL here</p>
+                    </div>
+                </div>
+                <div class="ref-item">
+                    <div class="ref-icon">YOLO</div>
+                    <div class="ref-text">
+                        <h4>Ultralytics YOLOv8</h4>
+                        <p>ultralytics.com - real-time object detection</p>
+                    </div>
+                </div>
+                <div class="ref-item">
+                    <div class="ref-icon">API</div>
+                    <div class="ref-text">
+                        <h4>FastAPI</h4>
+                        <p>fastapi.tiangolo.com - high-performance Python API framework</p>
+                    </div>
+                </div>
+                <div class="ref-item">
+                    <div class="ref-icon">CV</div>
+                    <div class="ref-text">
+                        <h4>OpenCV</h4>
+                        <p>opencv.org - computer vision library</p>
+                    </div>
+                </div>
+                <div class="ref-item">
+                    <div class="ref-icon">NX</div>
+                    <div class="ref-text">
+                        <h4>NetworkX</h4>
+                        <p>networkx.org - graph algorithms and routing</p>
+                    </div>
+                </div>
+                <div class="ref-item">
+                    <div class="ref-icon">MAP</div>
+                    <div class="ref-text">
+                        <h4>Leaflet + OpenStreetMap</h4>
+                        <p>leafletjs.com - map visualization and OSM tiles</p>
+                    </div>
+                </div>
+                <div class="ref-item">
+                    <div class="ref-icon">UI</div>
+                    <div class="ref-text">
+                        <h4>React, Vite, Streamlit</h4>
+                        <p>react.dev, vite.dev, streamlit.io</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ SLIDE 8: THANK YOU ════════════════════ -->
+        <div class="slide slide-8" data-slide="8">
+            <span class="slide-number">08 / 08</span>
+            <div class="thank-you-text">Thank You</div>
+            <p class="tagline">
+                Traffic AI Optimizer connects computer vision, adaptive signal control, and emergency routing to
+                reduce congestion and accelerate critical response.
+            </p>
+
+            <div class="stat-row" style="margin-top: 48px;">
+                <div class="stat-item">
+                    <div class="stat-value" style="color: var(--green);">5</div>
+                    <div class="stat-label">Core Engines</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" style="color: var(--blue);">18</div>
+                    <div class="stat-label">API Endpoints</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" style="color: var(--yellow);">2</div>
+                    <div class="stat-label">Dashboards</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" style="color: var(--cyan);">LIVE</div>
+                    <div class="stat-label">Real-Time Pipeline</div>
+                </div>
+            </div>
+
+            <div class="team-info" style="margin-top: 40px;">
+                <div class="label">INDIA INNOVATES 2026</div>
+                <div class="team-members">
+                    <div class="team-member" style="border-color: rgba(0,255,135,0.2);">
+                        Traffic AI Optimizer Team
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    <!-- ════════════════════ NAVIGATION BAR ════════════════════ -->
+    <div class="nav-bar">
+        <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← PREV</button>
+
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="nav-dots" id="navDots"></div>
+            <span class="nav-counter" id="counter">01 / 08</span>
+        </div>
+
+        <button class="nav-btn" id="nextBtn" onclick="navigate(1)">NEXT →</button>
+    </div>
+
+    <script>
+        let current = 0;
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+        const dotsContainer = document.getElementById('navDots');
+        const counter = document.getElementById('counter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Build dots
+        for (let i = 0; i < total; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goTo(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        function goTo(idx) {
+            if (idx < 0 || idx >= total) return;
+            slides[current].classList.remove('active');
+            current = idx;
+            slides[current].classList.add('active');
+            updateUI();
+        }
+
+        function navigate(dir) {
+            goTo(current + dir);
+        }
+
+        function updateUI() {
+            const dots = dotsContainer.querySelectorAll('.nav-dot');
+            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+            prevBtn.disabled = current === 0;
+            nextBtn.disabled = current === total - 1;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); navigate(1); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); navigate(-1); }
+            if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+            if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+        });
+    </script>
+
+</body>
+
+</html>

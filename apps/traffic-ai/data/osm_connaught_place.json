@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "name": "Connaught Place (New Delhi)",
+    "bbox": [28.6225, 77.2064, 28.6405, 77.2270],
+    "source": "overpass",
+    "highways": ["primary", "secondary", "tertiary"]
+  },
+  "ways": []
+}

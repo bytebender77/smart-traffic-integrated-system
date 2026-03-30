@@ -1,0 +1,2 @@
+# Place YOLOv8 model weights here.
+# Download with: yolo download model=yolov8n.pt

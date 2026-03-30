@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+opencv-python
+ultralytics
+numpy
+pandas
+networkx
+streamlit
+python-multipart
+pydantic
+httpx
