@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  # ── Traffic AI Backend (FastAPI + YOLOv8) ──────────────────────────────
+  traffic-ai-backend:
+    build:
+      context: ./apps/traffic-ai
+      dockerfile: Dockerfile
+    container_name: traffic-ai-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/traffic-ai/data:/app/data
+    environment:
+      - CORS_ORIGINS=*
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Legacy SUMO Backend (FastAPI + TraCI) ──────────────────────────────
+  legacy-sumo-backend:
+    build:
+      context: ./apps/legacy-sumo
+      dockerfile: Dockerfile
+    container_name: legacy-sumo-backend
+    ports:
+      - "8001:8001"
+    environment:
+      - SUMO_HOME=/usr/share/sumo
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── React Frontend (Vite Dev Server) ───────────────────────────────────
+  frontend:
+    build:
+      context: ./apps/traffic-ai/frontend
+      dockerfile: Dockerfile
+    container_name: traffic-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000
+      - VITE_LEGACY_API_BASE_URL=http://localhost:8001
+    depends_on:
+      traffic-ai-backend:
+        condition: service_healthy
+      legacy-sumo-backend:
+        condition: service_healthy
+    restart: unless-stopped
